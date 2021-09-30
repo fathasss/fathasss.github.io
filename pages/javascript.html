@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="language" content="Turkish" />
+    <meta name="copyright" content="(c) 2019 Tüm Hakları Saklıdır." />
+    <meta name="developer" content="Fatih HAS, fatihhas2609@gmail.com" />
+      <style>
+        body{font-family:'Arial',sans-serif;}
+        .kapsul{width:600px;height:300px;position:relative;background:#ddd;margin:10px auto;}
+        .gezgin{width:20px;height:20px;background:red;position:absolute;left:0;top:0;border-radius:50%;}
+        .ortalayici{width:600px;min-height:20px;margin:0px auto;text-align:center;}
+        .ortalayici h1{margin:0px;}
+        .ortalayici a{color:#BC5393;text-decoration:none;}
+        .konum{
+          width: 1920px;
+          height: 50px;
+          line-height: 50px;
+          font-size: 2em;
+          background: #64DDBB;
+          color:#D33257;
+          padding:5px;
+          margin:5px;
+          }
+      </style>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="ortalayici">
+      <h1>Javascript ile Mouse Takibi</h1>
+    </div>
+      X ekseni konumu:<div id="x" class="konum"><script>event.clientX+"px";</script></div>
+      Y ekseni konumu:<div id="y" class="konum"><script>event.clientY+"px";</script></div>
+      <!--X ve Y eksenlerindeki konumları fare hareketine değişmektedir.
+      Farenin takip olayını konumların altındaki renkli alanda görebilirsiniz.-->
+    <div class="kapsul">
+      <div class="gezgin"></div>
+    </div>
+    <script>
+      //Aşağıdaki fonksiyon sayesindeki kırmızı dairenin fare imlecini takip etmesini sağlıyoruz.
+      function mousetakip(event){
+        let alan = kapsul.getBoundingClientRect(); 
+        //GetBoundingClientRect () yöntemi, bir öğenin boyutunu ve görünüm alanına göre konumunu döndürür.
+        let dblMouseX = event.clientX - alan.left; 
+        //clientX--Mouseun X eksenindeki hareketi
+        let dblMouseY = event.clientY - alan.top; 
+        //clientY--Mouseun Y eksenindeki hareketi
+        let dblGezginX = gezgin.offsetLeft;
+        let dblGezginY = gezgin.offsetTop;
+        let dblFarkX = dblMouseX - dblGezginX;
+        let dblFarkY = dblMouseY - dblGezginY;
+        let dblKatsayi = 0.08;
+        gezgin.style.left = (dblGezginX + (dblFarkX * dblKatsayi)) + "px";
+        gezgin.style.top = (dblGezginY + (dblFarkY * dblKatsayi)) + "px";
+      }
+      var gezgin = document.querySelector('.gezgin');
+      let kapsul = document.querySelector(".kapsul"); 
+      kapsul.addEventListener("mousemove", mousetakip);
+      //onmousemove methoduyla farenin konumunu tespit ediyoruz.
+      window.onmousemove=function(event){
+        var X_pozition=document.getElementById('x');
+        var Y_pozition=document.getElementById('y');
+        X_pozition.innerHTML=event.clientX;
+        Y_pozition.innerHTML=event.clientY;
+      }
+      //mousedown methoduyla farenin tıklandığı zamandaki konumunu tespit ediyoruz.
+      window.onmousedown=function(event){
+        var X_pozition=document.getElementById('x1');
+        var Y_pozition=document.getElementById('y1');
+        X_pozition.innerHTML=event.clientX;
+        Y_pozition.innerHTML=event.clientY;
+      }
+    </script>
+  Tıklandığında X ekseni konumu:<div id="x1" class="konum"><script>event.clientX+"px";</script></div>
+  Tıklandığında Y ekseni konumu:<div id="y1" class="konum"><script>event.clientY+"px";</script></div>
+  <!--event.clientX ve event.clientY ile onmousedown methodu çalıştığında aldığımız verileri ekrana yazıyoruz..-->
+  </body>
+  <footer>
+      <p>Developed by Fatih HAS..©</p>
+      <p> <a href="../../index.php">Ana sayfaya dön :)</a></p>
+  </footer>
+  <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+(function(){
+var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+s1.async=true;
+s1.src='https://embed.tawk.to/5fa92e938e1c140c2abc30ef/default';
+s1.charset='UTF-8';
+s1.setAttribute('crossorigin','*');
+s0.parentNode.insertBefore(s1,s0);
+})();
+</script>
+<!--End of Tawk.to Script-->
+</html>
